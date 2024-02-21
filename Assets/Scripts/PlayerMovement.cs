@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject[] Inventory;
     public float InventoryLerpSpeed;
     public int CurrentObject;
+
     [Header("Interaction")]
     public float RayLength = 10;
     [Header("UI")]
@@ -62,6 +63,10 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource LandSound;
     public AudioSource KeyPickup;
     public AudioSource HitSound;
+    [Header("Arms")]
+    public GameObject LeftTarget;
+    public GameObject RightTarget;
+    public float ArmLerpSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -79,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
         Looks = true;
         speed = 50;
+        MessageText.text = "";
     }
 
     // Update is called once per frame
@@ -88,6 +94,30 @@ public class PlayerMovement : MonoBehaviour
         SlidingMechanics();
         Jumping();
         UpdateHitEffectColor();
+        if (Inventory[CurrentObject] != null)
+        {
+            // Inventory[CurrentObject].transform.position = Vector3.Lerp(Inventory[CurrentObject].transform.position, HandObject.transform.position, InventoryLerpSpeed);
+            // Inventory[CurrentObject].transform.rotation = Quaternion.Slerp(Inventory[CurrentObject].transform.rotation, HandObject.transform.rotation, InventoryLerpSpeed);
+            //Make gun sway when looking around
+            Inventory[CurrentObject].transform.rotation = Quaternion.Slerp(Inventory[CurrentObject].transform.rotation, HandObject.transform.rotation, InventoryLerpSpeed * Time.deltaTime);
+
+        }
+        if(Inventory[CurrentObject] != null){
+            foreach(Transform transform in Inventory[CurrentObject].transform) {
+                if(transform.CompareTag("LeftGrip")) {
+                    LeftTarget.transform.position = transform.position;
+                    LeftTarget.transform.rotation = transform.rotation;
+                    
+                }else if(transform.CompareTag("RightGrip")) {
+                    RightTarget.transform.position = transform.position;
+                    RightTarget.transform.rotation = transform.rotation;
+                    break;
+                }
+            }
+        }else{
+            LeftTarget.transform.position = Vector3.Lerp(LeftTarget.transform.position, HandObject.transform.position, ArmLerpSpeed * Time.deltaTime);
+            RightTarget.transform.position = Vector3.Lerp(RightTarget.transform.position, HandObject.transform.position, ArmLerpSpeed * Time.deltaTime);
+        }
         if(Health < MaxHealth){
             Health += 1f * Time.deltaTime;
         }
@@ -108,6 +138,10 @@ public class PlayerMovement : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Alpha3)){
             ChangeCurrentObject(2);
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            Aiming = !Aiming;
         }
         //Raycast to pickup items
         if(Physics.Raycast(MyCam.transform.position, MyCam.transform.forward, out RaycastHit hit, RayLength)){
@@ -224,8 +258,12 @@ public class PlayerMovement : MonoBehaviour
         UpdateHandPosition();
         if (Inventory[CurrentObject] != null)
         {
+            // Inventory[CurrentObject].transform.position = Vector3.Lerp(Inventory[CurrentObject].transform.position, HandObject.transform.position, InventoryLerpSpeed);
+            // Inventory[CurrentObject].transform.rotation = Quaternion.Slerp(Inventory[CurrentObject].transform.rotation, HandObject.transform.rotation, InventoryLerpSpeed);
+            //Make gun sway when looking around
             Inventory[CurrentObject].transform.position = Vector3.Lerp(Inventory[CurrentObject].transform.position, HandObject.transform.position, InventoryLerpSpeed * Time.deltaTime);
-            Inventory[CurrentObject].transform.rotation = Quaternion.Slerp(Inventory[CurrentObject].transform.rotation, HandObject.transform.rotation, Mathf.Clamp01(InventoryLerpSpeed * Time.deltaTime));
+            Inventory[CurrentObject].transform.rotation = Quaternion.Slerp(Inventory[CurrentObject].transform.rotation, HandObject.transform.rotation, InventoryLerpSpeed * Time.deltaTime);
+
         }
     }
     void Look(){
@@ -257,11 +295,6 @@ public class PlayerMovement : MonoBehaviour
         {
             speed = WalkSpeed;
             Running = false;
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            Aiming = !Aiming;
         }
 
     }
