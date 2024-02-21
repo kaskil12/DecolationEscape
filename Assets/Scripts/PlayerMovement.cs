@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using TMPro;
 using System.Reflection;
 using UnityEngine.SceneManagement;
+using System;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Camera Movement")]
     public Camera MyCam;
     public float Sensitivity;
     float camX;
+    public static float FOV = 60;
 
     [Header("Rigidbody Movement")]
     public Rigidbody rb;
@@ -94,13 +96,14 @@ public class PlayerMovement : MonoBehaviour
         SlidingMechanics();
         Jumping();
         UpdateHitEffectColor();
+        MyCam.fieldOfView = Mathf.Lerp(MyCam.fieldOfView, FOV, 2f * Time.deltaTime);
         if (Inventory[CurrentObject] != null)
         {
             // Inventory[CurrentObject].transform.position = Vector3.Lerp(Inventory[CurrentObject].transform.position, HandObject.transform.position, InventoryLerpSpeed);
             // Inventory[CurrentObject].transform.rotation = Quaternion.Slerp(Inventory[CurrentObject].transform.rotation, HandObject.transform.rotation, InventoryLerpSpeed);
             //Make gun sway when looking around
             Inventory[CurrentObject].transform.rotation = Quaternion.Slerp(Inventory[CurrentObject].transform.rotation, HandObject.transform.rotation, InventoryLerpSpeed * Time.deltaTime);
-
+            Inventory[CurrentObject].transform.position = Vector3.Lerp(Inventory[CurrentObject].transform.position, HandObject.transform.position, InventoryLerpSpeed * Time.deltaTime);
         }
         if(Inventory[CurrentObject] != null){
             foreach(Transform transform in Inventory[CurrentObject].transform) {
@@ -256,15 +259,10 @@ public class PlayerMovement : MonoBehaviour
         }
         ApplySlideForce();
         UpdateHandPosition();
-        if (Inventory[CurrentObject] != null)
-        {
-            // Inventory[CurrentObject].transform.position = Vector3.Lerp(Inventory[CurrentObject].transform.position, HandObject.transform.position, InventoryLerpSpeed);
-            // Inventory[CurrentObject].transform.rotation = Quaternion.Slerp(Inventory[CurrentObject].transform.rotation, HandObject.transform.rotation, InventoryLerpSpeed);
-            //Make gun sway when looking around
-            Inventory[CurrentObject].transform.position = Vector3.Lerp(Inventory[CurrentObject].transform.position, HandObject.transform.position, InventoryLerpSpeed * Time.deltaTime);
-            Inventory[CurrentObject].transform.rotation = Quaternion.Slerp(Inventory[CurrentObject].transform.rotation, HandObject.transform.rotation, InventoryLerpSpeed * Time.deltaTime);
-
-        }
+    }
+    //Recoil
+    public void Recoil(float RecoilAmount){
+        camX -= Mathf.Clamp(RecoilAmount, 0, 10) * Time.deltaTime;
     }
     void Look(){
         if (Looks)
@@ -375,15 +373,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Aiming)
         {
+            FOV = 50;
             Vector3 aimPositionWorld = AimPosition.transform.position;
             Vector3 hipPositionWorld = HipPosition.transform.position;
-            HandObject.transform.position = Vector3.Lerp(hipPositionWorld, aimPositionWorld, HandLerpSpeed);
+            HandObject.transform.position = Vector3.Lerp(HandObject.transform.position, aimPositionWorld, HandLerpSpeed);
         }
         else if (!Aiming)
         {
+            FOV = 60;
             Vector3 aimPositionWorld = AimPosition.transform.position;
             Vector3 hipPositionWorld = HipPosition.transform.position;
-            HandObject.transform.position = Vector3.Lerp(aimPositionWorld, hipPositionWorld, HandLerpSpeed);
+            HandObject.transform.position = Vector3.Lerp(HandObject.transform.position, hipPositionWorld, HandLerpSpeed);
         }
     }
 

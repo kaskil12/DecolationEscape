@@ -10,6 +10,13 @@ public class OldSniperScript : MonoBehaviour
     public bool isShooting;
     public Transform ShootPoint;
     public GameObject bulletPref;
+    public Camera AimCam;
+    [Header("Audio")]
+    public AudioSource shootSound;
+    public AudioSource reloadSound;
+
+    [Header("Recoil")]
+    
     [Header("Sway")]
     public float SwayMultiplier;
     public float SwaySmooth;
@@ -34,6 +41,12 @@ public class OldSniperScript : MonoBehaviour
     void Update()
     {
         if(!isEquipped)return;
+        PlayerMovement player = FindObjectOfType<PlayerMovement>();
+        if(player.Aiming){
+            AimCam.fieldOfView = Mathf.Lerp(AimCam.fieldOfView, 20, 0.1f);
+        }else{
+            AimCam.fieldOfView = Mathf.Lerp(AimCam.fieldOfView, 40, 0.1f);
+        }
         // float mouseX = Input.GetAxisRaw("Mouse X") * SwayMultiplier;
         // float mouseY = Input.GetAxisRaw("Mouse Y") * SwayMultiplier;
         // Quaternion rotationX = Quaternion.AngleAxis(-mouseY, Vector3.right);
@@ -56,6 +69,10 @@ public class OldSniperScript : MonoBehaviour
                 Reload();
             }
         }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Reload();
+        }
     }
     public void Equip()
     {
@@ -69,7 +86,9 @@ public class OldSniperScript : MonoBehaviour
     }
     public void Shoot()
     {
+        ammo--;
         Debug.Log("Sniper Shot");
+        shootSound.Play();
         Debug.Log(ShootPoint.position);
         GameObject bullet = Instantiate(bulletPref, ShootPoint.position, ShootPoint.rotation);
         BulletScript bulletScript = bullet.GetComponent<BulletScript>();
@@ -78,6 +97,9 @@ public class OldSniperScript : MonoBehaviour
             bulletScript.Initialize(ShootPoint, shootSpeed, gravityForce);
         }
         Destroy(bullet, bulletLifeTime);
+        //Recoil
+        PlayerMovement player = FindObjectOfType<PlayerMovement>();
+        player.Recoil(10);
     }
     IEnumerator ShootDelay()
     {
@@ -87,5 +109,17 @@ public class OldSniperScript : MonoBehaviour
     public void Reload()
     {
         Debug.Log("Sniper Reloaded");
+        if(ammo < maxAmmo)
+        {
+            if(!reloadSound.isPlaying)reloadSound.Play();
+            isReloading = true;
+            StartCoroutine(ReloadDelay());
+        }
+    }
+    IEnumerator ReloadDelay()
+    {
+        yield return new WaitForSeconds(reloadTime);
+        ammo = maxAmmo;
+        isReloading = false;
     }
 }
