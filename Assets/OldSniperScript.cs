@@ -50,7 +50,7 @@ public class OldSniperScript : MonoBehaviour
             if(isAiming){
                 AimCam.fieldOfView = Mathf.Lerp(AimCam.fieldOfView, 2, 0.1f);
             }else{
-                AimCam.fieldOfView = Mathf.Lerp(AimCam.fieldOfView, 20, 0.1f);
+                AimCam.fieldOfView = Mathf.Lerp(AimCam.fieldOfView, 10, 0.1f);
             }
         }else{
             AimCam.fieldOfView = Mathf.Lerp(AimCam.fieldOfView, 40, 0.1f);

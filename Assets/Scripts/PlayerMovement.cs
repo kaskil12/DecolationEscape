@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Camera Movement")]
     public Camera MyCam;
     public float Sensitivity;
+    public float normalSensitivity;
+    public float AimSensitivity;
     float camX;
     public static float FOV = 60;
 
@@ -74,6 +76,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         InitializePlayer();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void InitializePlayer()
@@ -82,8 +86,6 @@ public class PlayerMovement : MonoBehaviour
         SlidAble = true;
         Jumpable = true;
         Health = 100;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         Looks = true;
         speed = 50;
         MessageText.text = "";
@@ -96,6 +98,8 @@ public class PlayerMovement : MonoBehaviour
         SlidingMechanics();
         Jumping();
         UpdateHitEffectColor();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         MyCam.fieldOfView = Mathf.Lerp(MyCam.fieldOfView, FOV, 2f * Time.deltaTime);
         if (Inventory[CurrentObject] != null)
         {
@@ -184,26 +188,50 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    void HandPickup(GameObject Object){
-        if(Inventory[CurrentObject] == null){
-            Object.GetComponent<Rigidbody>().isKinematic = true;
-            Object.GetComponent<Collider>().enabled = false;
-            Inventory[CurrentObject] = Object;
-            Inventory[CurrentObject].transform.position = HandObject.transform.position;
-            Inventory[CurrentObject].transform.rotation = HandObject.transform.rotation;
-            if (Inventory[CurrentObject] != null){
-                MonoBehaviour[] inventoryScripts = Inventory[CurrentObject].GetComponents<MonoBehaviour>();
-                foreach (var script in inventoryScripts)
-                {
-                    MethodInfo equipMethod = script.GetType().GetMethod("Equip");
-                    if (equipMethod != null)
-                    {
-                        equipMethod.Invoke(script, null);
-                        break;
-                    }
+    void UpdateInventory(){
+        //Disable all inventory objects exept the current one
+        for(int i = 0; i < Inventory.Length; i++){
+            if(Inventory[i] != null){
+                if(i != CurrentObject){
+                    Inventory[i].SetActive(false);
+                }else{
+                    Inventory[i].SetActive(true);
                 }
             }
         }
+    }
+    void HandPickup(GameObject Object){
+            int nextSlot = -1;
+            for(int i = 0; i < Inventory.Length; i++){
+                if(Inventory[i] == null){
+                    nextSlot = i;
+                    break;
+                }
+            }
+            if (nextSlot != -1){
+                Object.GetComponent<Rigidbody>().isKinematic = true;
+                Object.GetComponent<Collider>().enabled = false;
+                Inventory[nextSlot] = Object;
+                Inventory[nextSlot].transform.position = HandObject.transform.position;
+                Inventory[nextSlot].transform.rotation = HandObject.transform.rotation;
+                UpdateInventory();
+                if (Inventory[nextSlot] != null){
+                    MonoBehaviour[] inventoryScripts = Inventory[nextSlot].GetComponents<MonoBehaviour>();
+                    foreach (var script in inventoryScripts)
+                    {
+                        MethodInfo equipMethod = script.GetType().GetMethod("Equip");
+                        if (equipMethod != null)
+                        {
+                            equipMethod.Invoke(script, null);
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            
+        
+
     }
     public void HandDrop(){
         if(Inventory[CurrentObject] != null){
@@ -374,6 +402,7 @@ public class PlayerMovement : MonoBehaviour
         if (Aiming)
         {
             FOV = 50;
+            Sensitivity = AimSensitivity;
             Vector3 aimPositionWorld = AimPosition.transform.position;
             Vector3 hipPositionWorld = HipPosition.transform.position;
             HandObject.transform.position = Vector3.Lerp(HandObject.transform.position, aimPositionWorld, HandLerpSpeed);
@@ -381,6 +410,7 @@ public class PlayerMovement : MonoBehaviour
         else if (!Aiming)
         {
             FOV = 60;
+            Sensitivity = normalSensitivity;
             Vector3 aimPositionWorld = AimPosition.transform.position;
             Vector3 hipPositionWorld = HipPosition.transform.position;
             HandObject.transform.position = Vector3.Lerp(HandObject.transform.position, hipPositionWorld, HandLerpSpeed);

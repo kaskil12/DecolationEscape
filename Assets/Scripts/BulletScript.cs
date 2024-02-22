@@ -8,14 +8,13 @@ public class BulletScript : MonoBehaviour
     private float gravity;
     private Vector3 startPos;
     private Vector3 startForward;
-    private bool isInitialized;
-    private float StartTime;
+    private bool isInitialized = false;
+    private float StartTime = -1f;
     public GameObject BulletHolePrefab;
     public void Initialize(Transform startPoint, float speed, float gravity)
     {
         startPos = startPoint.position;
         startForward = startPoint.forward.normalized;
-        //.Log(startForward);
         this.speed = speed;
         this.gravity = gravity;
         isInitialized = true;
@@ -31,17 +30,15 @@ public class BulletScript : MonoBehaviour
     private bool CastRayBetweenPoints(Vector3 startPoint, Vector3 endPoint, out RaycastHit hit){
         return Physics.Raycast(startPoint, endPoint - startPoint, out hit, (endPoint - startPoint).magnitude);
     }
-    float currentTime;
     private void FixedUpdate()
     {
         if(!isInitialized)return;
-        if(StartTime<=0)StartTime=Time.time;
+        if(StartTime < 0)StartTime = Time.time;
         //Debug.Log(StartTime);
         RaycastHit hit;
-        //.Log(transform.position);
-        currentTime = StartTime;
+        float currentTime = Time.time - StartTime;
         float nextTime = currentTime + Time.fixedDeltaTime;
-        //Debug.Log(currentTime);
+
         Vector3 currentPoint = FindPointOnBullet(currentTime);
         Vector3 nextPoint = FindPointOnBullet(nextTime);
         //.Log(nextTime);
