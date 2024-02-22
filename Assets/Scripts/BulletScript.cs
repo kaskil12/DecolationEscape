@@ -10,6 +10,7 @@ public class BulletScript : MonoBehaviour
     private Vector3 startForward;
     private bool isInitialized;
     private float StartTime;
+    public GameObject BulletHolePrefab;
     public void Initialize(Transform startPoint, float speed, float gravity)
     {
         startPos = startPoint.position;
@@ -35,17 +36,19 @@ public class BulletScript : MonoBehaviour
     {
         if(!isInitialized)return;
         if(StartTime<=0)StartTime=Time.time;
-        //.Log(StartTime);
+        //Debug.Log(StartTime);
         RaycastHit hit;
-        Debug.Log(transform.position);
+        //.Log(transform.position);
         currentTime = StartTime;
         float nextTime = currentTime + Time.fixedDeltaTime;
-        //.Log(currentTime);
+        //Debug.Log(currentTime);
         Vector3 currentPoint = FindPointOnBullet(currentTime);
         Vector3 nextPoint = FindPointOnBullet(nextTime);
         //.Log(nextTime);
-
+        Debug.Log(currentPoint);
         if(CastRayBetweenPoints(currentPoint, nextPoint, out hit)){
+            Debug.Log(hit.collider.name);
+            GameObject BulletHole = Instantiate(BulletHolePrefab, hit.point, Quaternion.LookRotation(hit.normal)) as GameObject;
             Destroy(gameObject);
         }
     }

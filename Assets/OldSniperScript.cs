@@ -30,7 +30,8 @@ public class OldSniperScript : MonoBehaviour
     public float shootSpeed;
     public float gravityForce;
     public float bulletLifeTime;
-
+    [Header("Aiming")]
+    public bool isAiming;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +44,14 @@ public class OldSniperScript : MonoBehaviour
         if(!isEquipped)return;
         PlayerMovement player = FindObjectOfType<PlayerMovement>();
         if(player.Aiming){
-            AimCam.fieldOfView = Mathf.Lerp(AimCam.fieldOfView, 20, 0.1f);
+            if(Input.GetKeyDown(KeyCode.V)){
+                isAiming = !isAiming;
+            }
+            if(isAiming){
+                AimCam.fieldOfView = Mathf.Lerp(AimCam.fieldOfView, 2, 0.1f);
+            }else{
+                AimCam.fieldOfView = Mathf.Lerp(AimCam.fieldOfView, 20, 0.1f);
+            }
         }else{
             AimCam.fieldOfView = Mathf.Lerp(AimCam.fieldOfView, 40, 0.1f);
         }
@@ -77,19 +85,19 @@ public class OldSniperScript : MonoBehaviour
     public void Equip()
     {
         isEquipped = true;
-        Debug.Log("Sniper Equipped");
+        //.Log("Sniper Equipped");
     }
     public void Unequip()
     {
         isEquipped = false;
-        Debug.Log("Sniper Unequipped");
+        //.Log("Sniper Unequipped");
     }
     public void Shoot()
     {
         ammo--;
-        Debug.Log("Sniper Shot");
+        //.Log("Sniper Shot");
         shootSound.Play();
-        Debug.Log(ShootPoint.position);
+        //.Log(ShootPoint.position);
         GameObject bullet = Instantiate(bulletPref, ShootPoint.position, ShootPoint.rotation);
         BulletScript bulletScript = bullet.GetComponent<BulletScript>();
         if(bulletScript != null)
@@ -108,7 +116,7 @@ public class OldSniperScript : MonoBehaviour
     }
     public void Reload()
     {
-        Debug.Log("Sniper Reloaded");
+        //.Log("Sniper Reloaded");
         if(ammo < maxAmmo)
         {
             if(!reloadSound.isPlaying)reloadSound.Play();

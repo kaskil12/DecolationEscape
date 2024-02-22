@@ -362,7 +362,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Sliding && !hasAppliedForce && SlidAble && rb.velocity.magnitude > 1)
         {
-            Debug.Log("Force");
+            //.Log("Force");
             StartCoroutine(SlideForceDelay());
             rb.AddForce(transform.forward * 20 * Time.deltaTime, ForceMode.VelocityChange);
             hasAppliedForce = true;
