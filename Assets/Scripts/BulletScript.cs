@@ -45,7 +45,7 @@ public class BulletScript : MonoBehaviour
         Vector3 currentPoint = FindPointOnBullet(currentTime);
         Vector3 nextPoint = FindPointOnBullet(nextTime);
         //.Log(nextTime);
-        Debug.Log(currentPoint);
+        // Debug.Log(currentPoint);
         if(CastRayBetweenPoints(currentPoint, nextPoint, out hit)){
             Debug.Log(hit.collider.name);
             GameObject BulletHole = Instantiate(BulletHolePrefab, hit.point, Quaternion.LookRotation(hit.normal)) as GameObject;
