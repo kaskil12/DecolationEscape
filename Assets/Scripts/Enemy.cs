@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float speed;
     public float Damage;
     public float Health = 100f;
+    public Animator animator;
     public bool Initialized = false;
     // Start is called before the first frame update
     public void Initialize(float scale, float speed, float damage, float health){
