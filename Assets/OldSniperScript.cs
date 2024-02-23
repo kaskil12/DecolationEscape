@@ -102,7 +102,7 @@ public class OldSniperScript : MonoBehaviour
         BulletScript bulletScript = bullet.GetComponent<BulletScript>();
         if(bulletScript != null)
         {
-            bulletScript.Initialize(ShootPoint, shootSpeed, gravityForce);
+            bulletScript.Initialize(ShootPoint, shootSpeed, gravityForce, damage);
         }
         Destroy(bullet, bulletLifeTime);
         //Recoil

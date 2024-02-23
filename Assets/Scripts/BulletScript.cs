@@ -11,13 +11,15 @@ public class BulletScript : MonoBehaviour
     private bool isInitialized = false;
     private float StartTime = -1f;
     public GameObject BulletHolePrefab;
-    public void Initialize(Transform startPoint, float speed, float gravity)
+    float Damage;
+    public void Initialize(Transform startPoint, float speed, float gravity, float damage)
     {
         startPos = startPoint.position;
         startForward = startPoint.forward.normalized;
         this.speed = speed;
         this.gravity = gravity;
         isInitialized = true;
+        Damage = damage;
     }
 
     private Vector3 FindPointOnBullet(float time){
@@ -46,6 +48,9 @@ public class BulletScript : MonoBehaviour
         if(CastRayBetweenPoints(currentPoint, nextPoint, out hit)){
             Debug.Log(hit.collider.name);
             GameObject BulletHole = Instantiate(BulletHolePrefab, hit.point, Quaternion.LookRotation(hit.normal)) as GameObject;
+            if(hit.collider.tag == "Enemy"){
+                hit.collider.GetComponent<Enemy>().TakeDamageEnemy(Damage);
+            }
             Destroy(gameObject);
         }
     }
