@@ -11,6 +11,7 @@ public class OldSniperScript : MonoBehaviour
     public Transform ShootPoint;
     public GameObject bulletPref;
     public Camera AimCam;
+    public Animator animator;
     [Header("Audio")]
     public AudioSource shootSound;
     public AudioSource reloadSound;
@@ -69,6 +70,7 @@ public class OldSniperScript : MonoBehaviour
                 {
                     isShooting = true;
                     Shoot();
+                    animator.SetTrigger("Shoot");
                     StartCoroutine(ShootDelay());
                 }
             }
@@ -77,7 +79,7 @@ public class OldSniperScript : MonoBehaviour
                 Reload();
             }
         }
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.R) && !isReloading && ammo < maxAmmo)
         {
             Reload();
         }

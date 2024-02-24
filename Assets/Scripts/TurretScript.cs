@@ -12,6 +12,7 @@ public class TurretScript : MonoBehaviour
     public float shootSpeed;
     public float gravityForce;
     public GameObject bulletPref;
+    public AudioSource ShootSound;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +67,7 @@ public class TurretScript : MonoBehaviour
     IEnumerator Attack()
     {
         AttackAble = false;
+        ShootSound.Play();
         yield return new WaitForSeconds(AttackSpeed);
         AttackAble = true;
     }

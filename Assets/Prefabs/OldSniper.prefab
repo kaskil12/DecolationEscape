@@ -359,7 +359,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2538462481573440834}
   - component: {fileID: 8825896505952455028}
-  m_Layer: 0
+  - component: {fileID: 7604218669419782895}
+  - component: {fileID: 6122580754042418148}
+  m_Layer: 8
   m_Name: AimCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,6 +434,83 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &7604218669419782895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2888345900238207079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 2538462481573440834}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 264
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
+--- !u!114 &6122580754042418148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2888345900238207079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 5a08479468db2254e9f25b56735505a4, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1 &3327497907751201859
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,15 +812,16 @@ MonoBehaviour:
   ShootPoint: {fileID: 3258364225850940764}
   bulletPref: {fileID: 864372885090935097, guid: b5f6a145053cd9b4789d9628de0b1ad1, type: 3}
   AimCam: {fileID: 8825896505952455028}
+  animator: {fileID: 5593376915726032384}
   shootSound: {fileID: 5169072683153054734}
   reloadSound: {fileID: 5985219615713590370}
   SwayMultiplier: 0.8
   SwaySmooth: 0.1
   damage: 50
-  ammo: 1
-  maxAmmo: 2
+  ammo: 5
+  maxAmmo: 5
   reloadTime: 3
-  fireRate: 2
+  fireRate: 3
   shootSpeed: 500
   gravityForce: 9.8
   bulletLifeTime: 10
@@ -807,7 +887,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: a1fb92265e92ecf488fa356c7f37d5b0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
