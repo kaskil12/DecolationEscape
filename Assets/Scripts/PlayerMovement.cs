@@ -49,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Inventory")]
     public GameObject[] Inventory;
     public float InventoryLerpSpeed;
+    public float InventoryLerpSpeedAiming;
+    public float InventoryLerpSpeedNormal;
     public int CurrentObject;
 
     [Header("Interaction")]
@@ -403,6 +405,7 @@ public class PlayerMovement : MonoBehaviour
         {
             FOV = 50;
             Sensitivity = AimSensitivity;
+            InventoryLerpSpeed = InventoryLerpSpeedAiming;
             Vector3 aimPositionWorld = AimPosition.transform.position;
             Vector3 hipPositionWorld = HipPosition.transform.position;
             HandObject.transform.position = Vector3.Lerp(HandObject.transform.position, aimPositionWorld, HandLerpSpeed);
@@ -411,6 +414,7 @@ public class PlayerMovement : MonoBehaviour
         {
             FOV = 60;
             Sensitivity = normalSensitivity;
+            InventoryLerpSpeed = InventoryLerpSpeedNormal;
             Vector3 aimPositionWorld = AimPosition.transform.position;
             Vector3 hipPositionWorld = HipPosition.transform.position;
             HandObject.transform.position = Vector3.Lerp(HandObject.transform.position, hipPositionWorld, HandLerpSpeed);

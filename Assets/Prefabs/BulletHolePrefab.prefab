@@ -4839,6 +4839,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8702789466374571864}
+  - component: {fileID: 2245684709189497792}
   m_Layer: 0
   m_Name: BulletHolePrefab
   m_TagString: Untagged
@@ -4863,6 +4864,18 @@ Transform:
   - {fileID: 4226592787199416985}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2245684709189497792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3534312912260851524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c99352c4ad172b4dbb96cd55f3f4e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6353499733760884318
 GameObject:
   m_ObjectHideFlags: 0

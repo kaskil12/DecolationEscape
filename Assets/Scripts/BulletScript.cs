@@ -47,9 +47,10 @@ public class BulletScript : MonoBehaviour
         // Debug.Log(currentPoint);
         if(CastRayBetweenPoints(currentPoint, nextPoint, out hit)){
             Debug.Log(hit.collider.name);
-            GameObject BulletHole = Instantiate(BulletHolePrefab, hit.point, Quaternion.LookRotation(hit.normal)) as GameObject;
             if(hit.collider.tag == "Enemy"){
                 hit.collider.GetComponent<Enemy>().TakeDamageEnemy(Damage);
+            }else{
+                GameObject BulletHole = Instantiate(BulletHolePrefab, hit.point, Quaternion.LookRotation(hit.normal)) as GameObject;
             }
             Destroy(gameObject);
         }

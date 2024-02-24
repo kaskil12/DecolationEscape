@@ -29,11 +29,11 @@ public class EnemySpawner : MonoBehaviour
         Enemy.GetComponent<Enemy>().Initialize(Random.Range(MinScale, MaxScale), Random.Range(MinSpeed, MaxSpeed), Random.Range(MinDamage, MaxDamage), Random.Range(MinHealth, MaxHealth));
         yield return new WaitForSeconds(5);
         MaxScale += 0.1f;
-        MinScale += 0.1f;
+        MinScale += 0.01f;
         MaxSpeed += 0.5f;
-        MinSpeed += 0.1f;
+        MinSpeed += 0.01f;
         MaxHealth += 1f;
-        MinHealth += 1f;
+        MinHealth += 0.5f;
         StartCoroutine(SpawnEnemy());
     }
 }

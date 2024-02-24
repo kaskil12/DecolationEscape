@@ -8,6 +8,8 @@ TagManager:
   - RightGrip
   - LeftGrip
   - Enemy
+  - Base
+  - Breakable
   layers:
   - Default
   - TransparentFX
@@ -15,8 +17,8 @@ TagManager:
   - Post Processing
   - Water
   - UI
-  - 
-  - 
+  - Breakable
+  - Enemy
   - 
   - 
   - 
