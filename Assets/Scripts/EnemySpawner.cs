@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public float MaxPosition = 10f;
+    public float MinPosition = -10f;
+    public float MaxOffset = 5f;
+    public float MinOffset = -5f;   
     public GameObject EnemyPrefab;
     private float MaxScale;
     private float MinScale;
@@ -24,7 +28,9 @@ public class EnemySpawner : MonoBehaviour
     }
 
     IEnumerator SpawnEnemy(){
-        Vector3 SpawnPoint = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
+        float xOffset = Random.Range(-MaxOffset, MaxOffset);
+        float zOffset = Random.Range(-MaxOffset, MaxOffset);
+        Vector3 SpawnPoint = new Vector3(transform.position.x + xOffset, transform.position.y, transform.position.z + zOffset);
         GameObject Enemy = Instantiate(EnemyPrefab, SpawnPoint, Quaternion.identity) as GameObject;
         Enemy.GetComponent<Enemy>().Initialize(Random.Range(MinScale, MaxScale), Random.Range(MinSpeed, MaxSpeed), Random.Range(MinDamage, MaxDamage), Random.Range(MinHealth, MaxHealth));
         yield return new WaitForSeconds(5);
@@ -35,5 +41,9 @@ public class EnemySpawner : MonoBehaviour
         MaxHealth += 1f;
         MinHealth += 0.5f;
         StartCoroutine(SpawnEnemy());
+    }
+    void OnDrawGizmos(){
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, new Vector3(MaxPosition - MinPosition, 0, MaxPosition - MinPosition));
     }
 }
