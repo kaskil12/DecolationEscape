@@ -32,38 +32,48 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if(!Initialized)return;
-        if(Physics.Raycast(transform.position, Target.position - feet.transform.position, out RaycastHit hit, Range)){
-            if(hit.collider.tag == "Breakable"){
-                if(AttackAble){
+        // Raycast from the feet in the forward direction
+        if (Physics.Raycast(feet.transform.position, feet.transform.forward, out RaycastHit hit, Range, LayerMask.GetMask("Breakable")))
+        {
+            if (hit.collider.tag == "Breakable" || hit.collider.tag == "Base")
+            {
+                if (AttackAble)
+                {
                     // animator.SetTrigger("Attack");
                     agent.speed = 0;
+                    agent.SetDestination(transform.position);
                     StartCoroutine(Attack());
-                    hit.transform.GetComponent<Breakable>().TakeDamageBreakable(Damage);
-                }
-                
-            }else if(hit.collider.tag == "Base"){
-                if(AttackAble){
-                    // animator.SetTrigger("Attack");
-                    agent.speed = 0;
-                    StartCoroutine(Attack());
-                    hit.transform.GetComponent<Base>().TakeDamageBase(Damage);
-                }
-                
-            }
-        }else{
-            agent.speed = speeds;
-        }
-        if(Target == null){
-            Target = GameObject.Find("Base").transform;
-        }else{
-            agent.SetDestination(Target.position);
-        }
 
+                    // Process damage to Breakable or Base
+                    if (hit.collider.tag == "Breakable")
+                    {
+                        hit.transform.GetComponent<Breakable>().TakeDamageBreakable(Damage);
+                    }
+                    else if (hit.collider.tag == "Base")
+                    {
+                        hit.transform.GetComponent<Base>().TakeDamageBase(Damage);
+                    }
+                }
+            }
+        }
+        else
+        {
+            // If no collision, resume normal speed
+            agent.speed = speeds;
+            if (Target == null)
+            {
+                Target = GameObject.Find("Base").transform;
+            }
+            else
+            {
+                agent.SetDestination(Target.position);
+            }
+        }    
     }
-    void DrawGizmos(){
+    void OnDrawGizmos(){
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, Range);
-        Gizmos.DrawWireSphere(transform.position, AttackRange);
+        Gizmos.DrawWireSphere(feet.transform.position, Range);
+        Gizmos.DrawWireSphere(feet.transform.position, AttackRange);
     }
     IEnumerator Attack(){
         AttackAble = false;

@@ -374,12 +374,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1478926282536556334}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7121536297120330539}
+  m_Children: []
   m_Father: {fileID: 4073145759890165789}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1518480134119155748
@@ -567,7 +566,7 @@ Transform:
   m_GameObject: {fileID: 1762668441031950317}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 0.19938113, y: 0.19938113, z: 0.19938113}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -578,7 +577,7 @@ Transform:
   - {fileID: 1105913342553605161}
   - {fileID: 8069178560051136580}
   - {fileID: 6618784152804214770}
-  m_Father: {fileID: 2618516286603077703}
+  m_Father: {fileID: 4073145759890165789}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8156626258620585956
 Animator:
@@ -1559,6 +1558,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7121536297120330539}
   - {fileID: 2618516286603077703}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1596,7 +1596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackRange: 1.5
-  Range: 5
+  Range: 1.5
   feet: {fileID: 1478926282536556334}
   agent: {fileID: 4940431194126556229}
   Target: {fileID: 0}
