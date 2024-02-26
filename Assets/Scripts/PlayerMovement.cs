@@ -6,6 +6,7 @@ using TMPro;
 using System.Reflection;
 using UnityEngine.SceneManagement;
 using System;
+using Unity.VisualScripting;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Camera Movement")]
@@ -15,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     public float AimSensitivity;
     float camX;
     public static float FOV = 60;
+    public float recoilSpeed = 2.0f; // Adjust the speed of recoil as needed
+    private float targetCamX;
+    private bool isRecoiling = false;
 
     [Header("Rigidbody Movement")]
     public Rigidbody rb;
@@ -80,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         InitializePlayer();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        targetCamX = camX;
     }
 
     void InitializePlayer()
@@ -165,6 +170,7 @@ public class PlayerMovement : MonoBehaviour
         }else{
             InteractionText.text = "";
         }
+        //InventoryIconsUpdate();
     }
     public void SendMessage(string Message){
         MessageText.text = Message;
@@ -173,6 +179,17 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator MessageDelay(){
         yield return new WaitForSeconds(3);
         MessageText.text = "";
+    }
+    void InventoryIconsUpdate(){
+        foreach(GameObject obj in Inventory){
+            if(obj != null){
+                foreach(Transform child in obj.transform){
+                    if(child.CompareTag("Icon")){
+                        InventoryIcons[CurrentObject].sprite = child.GetComponent<SpriteRenderer>().sprite;
+                    }
+                }
+            }
+        }
     }
     void ChangeCurrentObject(int NewCurrentObject){
         if(Inventory[NewCurrentObject] == null){
@@ -291,9 +308,24 @@ public class PlayerMovement : MonoBehaviour
         UpdateHandPosition();
     }
     //Recoil
-    public void Recoil(float RecoilAmount){
-        camX -= Mathf.Clamp(RecoilAmount, 0, 10) * Time.deltaTime;
+    public void Recoil(float RecoilAmount)
+    {
+        camX -= RecoilAmount * 10 * Time.deltaTime;
+        // if (!isRecoiling)
+        // {
+        //     targetCamX -= RecoilAmount;
+        //     StartCoroutine(SmoothRecoil());
+        // }
     }
+
+    // IEnumerator SmoothRecoil()
+    // {
+    //     isRecoiling = true;
+    //     camX = Mathf.Lerp(camX, targetCamX, recoilSpeed * Time.deltaTime);
+    //     yield return new WaitForSeconds(1f);
+
+    //     isRecoiling = false;
+    // }
     void Look(){
         if (Looks)
         {

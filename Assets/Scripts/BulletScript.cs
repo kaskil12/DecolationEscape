@@ -11,6 +11,7 @@ public class BulletScript : MonoBehaviour
     private bool isInitialized = false;
     private float StartTime = -1f;
     public GameObject BulletHolePrefab;
+    public GameObject BloodSplatterPrefab;
     float Damage;
     public void Initialize(Transform startPoint, float speed, float gravity, float damage)
     {
@@ -49,6 +50,7 @@ public class BulletScript : MonoBehaviour
             Debug.Log(hit.collider.name);
             if(hit.collider.tag == "Enemy"){
                 hit.collider.GetComponent<Enemy>().TakeDamageEnemy(Damage);
+                GameObject BloodSplatter = Instantiate(BloodSplatterPrefab, hit.point, Quaternion.LookRotation(hit.normal)) as GameObject;
             }else{
                 GameObject BulletHole = Instantiate(BulletHolePrefab, hit.point, Quaternion.LookRotation(hit.normal)) as GameObject;
             }

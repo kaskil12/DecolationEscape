@@ -99,6 +99,9 @@ public class OldSniperScript : MonoBehaviour
         ammo--;
         //.Log("Sniper Shot");
         shootSound.Play();
+        //Recoil
+        PlayerMovement player = FindObjectOfType<PlayerMovement>();
+        player.Recoil(5);
         //.Log(ShootPoint.position);
         GameObject bullet = Instantiate(bulletPref, ShootPoint.position, ShootPoint.rotation);
         BulletScript bulletScript = bullet.GetComponent<BulletScript>();
@@ -107,9 +110,6 @@ public class OldSniperScript : MonoBehaviour
             bulletScript.Initialize(ShootPoint, shootSpeed, gravityForce, damage);
         }
         Destroy(bullet, bulletLifeTime);
-        //Recoil
-        PlayerMovement player = FindObjectOfType<PlayerMovement>();
-        player.Recoil(10);
     }
     IEnumerator ShootDelay()
     {

@@ -57,6 +57,7 @@ public class TurretScript : MonoBehaviour
                 if (bulletScript != null)
                 {
                     bulletScript.Initialize(ShootPoint, shootSpeed, gravityForce, damage);
+                    Destroy(bullet, 3);
                 }
 
                 StartCoroutine(Attack());

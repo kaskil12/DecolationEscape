@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletHolePrefab: {fileID: 3534312912260851524, guid: c26d141b165ce454cbcb5228d7fa5e67, type: 3}
+  BloodSplatterPrefab: {fileID: 928816601105106364, guid: 6643be2eb470839448f29e2bd45d6d9a, type: 3}
 --- !u!1 &1448231708018841155
 GameObject:
   m_ObjectHideFlags: 0

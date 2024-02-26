@@ -107,7 +107,7 @@ public class ArScript : MonoBehaviour
         Destroy(bullet, bulletLifeTime);
         //Recoil
         PlayerMovement player = FindObjectOfType<PlayerMovement>();
-        player.Recoil(10);
+        player.Recoil(2);
     }
     IEnumerator ShootDelay()
     {

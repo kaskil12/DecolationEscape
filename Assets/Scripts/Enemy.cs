@@ -49,9 +49,9 @@ public class Enemy : MonoBehaviour
                     hit.transform.GetComponent<Base>().TakeDamageBase(Damage);
                 }
                 
-            } else{
-                agent.speed = speeds;
             }
+        }else{
+            agent.speed = speeds;
         }
         if(Target == null){
             Target = GameObject.Find("Base").transform;
