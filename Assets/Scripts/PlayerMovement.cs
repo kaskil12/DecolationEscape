@@ -60,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Interaction")]
     public float RayLength = 10;
     [Header("UI")]
+    public TMP_Text MoneyText;
     public TMP_Text InteractionText;
     //Icons displaying items in inventory
     public Image[] InventoryIcons;
@@ -76,7 +77,14 @@ public class PlayerMovement : MonoBehaviour
     [Header("Arms")]
     public GameObject LeftTarget;
     public GameObject RightTarget;
+    public GameObject LeftEmpty;
+    public GameObject RightEmpty;
     public float ArmLerpSpeed;
+    [Header("Gameplay")]
+    public int Money;
+    bool isPlacingTurret = false;
+    public GameObject Turret;   
+    public GameObject TempTurret;
 
     // Start is called before the first frame update
     void Start()
@@ -129,8 +137,10 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }else{
-            LeftTarget.transform.position = Vector3.Lerp(LeftTarget.transform.position, HandObject.transform.position, ArmLerpSpeed * Time.deltaTime);
-            RightTarget.transform.position = Vector3.Lerp(RightTarget.transform.position, HandObject.transform.position, ArmLerpSpeed * Time.deltaTime);
+            LeftTarget.transform.position = Vector3.Lerp(LeftTarget.transform.position, LeftEmpty.transform.position, ArmLerpSpeed * Time.deltaTime);
+            LeftTarget.transform.rotation = Quaternion.Slerp(LeftTarget.transform.rotation, LeftEmpty.transform.rotation, ArmLerpSpeed * Time.deltaTime);
+            RightTarget.transform.position = Vector3.Lerp(RightTarget.transform.position, RightEmpty.transform.position, ArmLerpSpeed * Time.deltaTime);
+            RightTarget.transform.rotation = Quaternion.Slerp(RightTarget.transform.rotation, RightEmpty.transform.rotation, ArmLerpSpeed * Time.deltaTime);
         }
         if(Health < MaxHealth){
             Health += 1f * Time.deltaTime;
@@ -171,6 +181,31 @@ public class PlayerMovement : MonoBehaviour
             InteractionText.text = "";
         }
         //InventoryIconsUpdate();
+        //Placing Turret
+        if(Input.GetKeyDown(KeyCode.T)){
+            if(Money >= 100 && !isPlacingTurret){
+                isPlacingTurret = true;
+                TempTurret = Instantiate(Turret, transform.position, Quaternion.identity);
+            }
+        }
+        if(Physics.Raycast(MyCam.transform.position, MyCam.transform.forward, out RaycastHit SpawnerHit, RayLength) && isPlacingTurret){
+            TempTurret.transform.position = SpawnerHit.point;
+            Vector3 newPosition = TempTurret.transform.position;
+            newPosition.y = SpawnerHit.point.y + 0.5f;
+            TempTurret.transform.position = newPosition;
+            if(SpawnerHit.transform != null && Input.GetKeyDown(KeyCode.F)){
+                isPlacingTurret = false;
+                AddMoney(-100);
+            }else if(Input.GetKeyDown(KeyCode.G)){
+                isPlacingTurret = false;
+                Destroy(TempTurret);
+            }
+        }
+    }
+    //GamePlay
+    public void AddMoney(int Amount){
+        Money += Amount;
+        MoneyText.text = "Money: " + Money.ToString();
     }
     public void SendMessage(string Message){
         MessageText.text = Message;

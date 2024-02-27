@@ -11,21 +11,24 @@ public class Enemy : MonoBehaviour
     public GameObject feet;
     public NavMeshAgent agent;
     public Transform Target;
-    public float scale;
+    public float ScaleZombie;
     public float speeds;
     public float Damage;
     public float Health = 100f;
+    public float StartHealth = 100f;
     public Animator animator;
     public bool Initialized = false;
     // Start is called before the first frame update
     public void Initialize(float scale, float speed, float damage, float health){
         Initialized = true;
+        ScaleZombie = scale;
         Target = GameObject.Find("Base").transform;
         transform.localScale = new Vector3(scale, scale, scale);
         speeds = speed;
         agent.speed = speed;
         Damage = damage;
         Health = health;
+        StartHealth = health;
     }
 
     // Update is called once per frame
@@ -83,6 +86,10 @@ public class Enemy : MonoBehaviour
     public void TakeDamageEnemy(float damage){
         Health -= damage;
         if(Health <= 0){
+            PlayerMovement player = GameObject.Find("PlayerFolder").GetComponent<PlayerMovement>();
+            Debug.Log(Health + " " + ScaleZombie);
+            int MoneyToGive = Mathf.RoundToInt(StartHealth + ScaleZombie);
+            player.AddMoney(MoneyToGive);
             Destroy(gameObject);
         }
     }
