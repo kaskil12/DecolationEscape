@@ -37,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(SpawnTime);
         MaxScale += 0.1f;
         //MinScale += 0.01f;
-        MaxSpeed += 0.5f;
+        MaxSpeed += 0.2f;
         //MinSpeed += 0.01f;
         MaxHealth += 1f;
         //MinHealth += 0.5f;

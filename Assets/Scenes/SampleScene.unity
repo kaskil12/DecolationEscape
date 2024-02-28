@@ -502,6 +502,8 @@ MonoBehaviour:
   rotation: {x: -90, y: 0, z: -90}
   ItemName: Barrier
   PriceText: {fileID: 157262132}
+  IsItemPlaced: 1
+  IsPriceChanged: 1
 --- !u!114 &205165753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1317,6 +1319,8 @@ MonoBehaviour:
   rotation: {x: 0, y: 0, z: 0}
   ItemName: Secret Weapon
   PriceText: {fileID: 1544177483}
+  IsItemPlaced: 1
+  IsPriceChanged: 1
 --- !u!114 &390190684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2006,6 +2010,8 @@ MonoBehaviour:
   rotation: {x: 0, y: 0, z: 0}
   ItemName: Turret
   PriceText: {fileID: 1128964558}
+  IsItemPlaced: 1
+  IsPriceChanged: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2807,7 +2813,7 @@ MonoBehaviour:
   MinHealth: 50
   MaxDamage: 10
   MinDamage: 5
-  SpawnTime: 15
+  SpawnTime: 25
 --- !u!4 &1210764894
 Transform:
   m_ObjectHideFlags: 0
@@ -2861,7 +2867,7 @@ MonoBehaviour:
   MinHealth: 50
   MaxDamage: 10
   MinDamage: 5
-  SpawnTime: 15
+  SpawnTime: 25
 --- !u!4 &1229928915
 Transform:
   m_ObjectHideFlags: 0
@@ -3195,7 +3201,7 @@ MonoBehaviour:
   MinHealth: 50
   MaxDamage: 10
   MinDamage: 5
-  SpawnTime: 15
+  SpawnTime: 25
 --- !u!4 &1508175101
 Transform:
   m_ObjectHideFlags: 0
@@ -3610,6 +3616,7 @@ MonoBehaviour:
   RightEmpty: {fileID: 1906806570}
   ArmLerpSpeed: 10
   Money: 0
+  IsPlacingItem: 0
   TempItem: {fileID: 0}
   TempItemYOffset: 0
   TempItemRotation: {x: 0, y: 0, z: 0}
@@ -4441,7 +4448,7 @@ MonoBehaviour:
   MinHealth: 50
   MaxDamage: 10
   MinDamage: 5
-  SpawnTime: 15
+  SpawnTime: 25
 --- !u!4 &2131421696
 Transform:
   m_ObjectHideFlags: 0

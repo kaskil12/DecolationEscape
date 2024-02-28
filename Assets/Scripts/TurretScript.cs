@@ -51,7 +51,7 @@ public class TurretScript : MonoBehaviour
 
             if (AttackAble)
             {
-                ShootPoint.LookAt(targetPosition);
+                ShootPoint.LookAt(closestEnemy);
 
                 GameObject bullet = Instantiate(bulletPref, ShootPoint.position, ShootPoint.rotation);
                 BulletScript bulletScript = bullet.GetComponent<BulletScript>();
