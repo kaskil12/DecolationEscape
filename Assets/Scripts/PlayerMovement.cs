@@ -82,10 +82,11 @@ public class PlayerMovement : MonoBehaviour
     public float ArmLerpSpeed;
     [Header("Gameplay")]
     public int Money;
-    bool IsPlacingItem = false;
+    public bool IsPlacingItem = false;
     int TempItemCost;
     public GameObject TempItem;
     public float TempItemYOffset;
+    public Vector3 TempItemRotation;
     bool ShopOpen = false;
     public GameObject Shop;
     // Start is called before the first frame update
@@ -115,8 +116,6 @@ public class PlayerMovement : MonoBehaviour
         SlidingMechanics();
         Jumping();
         UpdateHitEffectColor();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         MyCam.fieldOfView = Mathf.Lerp(MyCam.fieldOfView, FOV, 2f * Time.deltaTime);
         if (Inventory[CurrentObject] != null)
         {
@@ -201,24 +200,29 @@ public class PlayerMovement : MonoBehaviour
             Cursor.visible = false;
         }
         //Placing Turret
-        if(Physics.Raycast(MyCam.transform.position, MyCam.transform.forward, out RaycastHit SpawnerHit, RayLength) && IsPlacingItem){
+        if(IsPlacingItem && Input.GetKeyDown(KeyCode.R)){
+            TempItemRotation = new Vector3(TempItemRotation.x, TempItemRotation.y + 90, TempItemRotation.z);
+        }
+        if(Physics.Raycast(MyCam.transform.position, MyCam.transform.forward, out RaycastHit SpawnerHit, RayLength, LayerMask.GetMask("Default")) && IsPlacingItem){
+            TempItem.transform.rotation = Quaternion.Euler(TempItemRotation);
             TempItem.transform.position = SpawnerHit.point;
             TempItem.transform.position = new Vector3(TempItem.transform.position.x, TempItem.transform.position.y + TempItemYOffset, TempItem.transform.position.z);
-            if(SpawnerHit.transform != null && Input.GetKeyDown(KeyCode.F)){
+            if(SpawnerHit.transform != null && Input.GetKeyDown(KeyCode.E)){
                 IsPlacingItem = false;
                 AddMoney(-TempItemCost);
-            }else if(Input.GetKeyDown(KeyCode.T)){
+            }else if(Input.GetKeyDown(KeyCode.G)){
                 IsPlacingItem = false;
                 Destroy(TempItem);
             }
         }
     }
-    public void BuyItemsPlayer(GameObject Item, int Cost, float YSpawnOffset){
+    public void BuyItemsPlayer(GameObject Item, int Cost, float YSpawnOffset, Vector3 Rotation){
         if(Money >= Cost){
             IsPlacingItem = true;
             TempItem = Item;
             TempItemCost = Cost;
             TempItemYOffset = YSpawnOffset;
+            TempItemRotation = Rotation;
             TempItem = Instantiate(TempItem, transform.position, Quaternion.identity);
         }
     }
