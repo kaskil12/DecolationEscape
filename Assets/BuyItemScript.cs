@@ -11,16 +11,34 @@ public class BuyItemScript : MonoBehaviour
     public Vector3 rotation;
     public string ItemName;
     public TMP_Text PriceText;
+    public bool IsItemPlaced = true;
+    public bool IsPriceChanged = true;
     void Start()
     {
         PriceText.text = ItemName + ": " +Price.ToString();
+    }
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.E) && IsItemPlaced == false){
+            IsItemPlaced = true;
+            IsPriceChanged = false;
+        }else{
+            if(Input.GetKeyDown(KeyCode.G) && IsItemPlaced == false){
+                IsItemPlaced = false;
+                IsPriceChanged = true;
+            }
+        }
+        if(!IsPriceChanged){
+            Price *= 2;
+            IsPriceChanged = true;
+        }
     }
     // Start is called before the first frame update
     public void BuyItem(){
         PriceText.text = ItemName + ": " +Price.ToString();
         PlayerMovement player = GameObject.Find("PlayerFolder").GetComponent<PlayerMovement>();
         if(player.Money >= Price && player.IsPlacingItem == false){
-        Price *= 2;
+        IsItemPlaced= false;
         player.BuyItemsPlayer(ObjectToBuy, Price, SpawnOffst, rotation);
         }
     }
