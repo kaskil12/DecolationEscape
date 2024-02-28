@@ -13,6 +13,8 @@ public class TurretScript : MonoBehaviour
     public float gravityForce;
     public GameObject bulletPref;
     public AudioSource ShootSound;
+    public GameObject RaycastCheck;
+    
 
     // Start is called before the first frame update
     void Start()

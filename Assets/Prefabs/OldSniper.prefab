@@ -817,7 +817,7 @@ MonoBehaviour:
   reloadSound: {fileID: 5985219615713590370}
   SwayMultiplier: 0.8
   SwaySmooth: 0.1
-  damage: 50
+  damage: 200
   ammo: 5
   maxAmmo: 5
   reloadTime: 3

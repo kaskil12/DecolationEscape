@@ -82,10 +82,12 @@ public class PlayerMovement : MonoBehaviour
     public float ArmLerpSpeed;
     [Header("Gameplay")]
     public int Money;
-    bool isPlacingTurret = false;
-    public GameObject Turret;   
-    public GameObject TempTurret;
-
+    bool IsPlacingItem = false;
+    int TempItemCost;
+    public GameObject TempItem;
+    public float TempItemYOffset;
+    bool ShopOpen = false;
+    public GameObject Shop;
     // Start is called before the first frame update
     void Start()
     {
@@ -181,25 +183,43 @@ public class PlayerMovement : MonoBehaviour
             InteractionText.text = "";
         }
         //InventoryIconsUpdate();
+        //Shop Open And Close
+        
+        if(Input.GetKeyDown(KeyCode.B)){
+            ShopOpen = !ShopOpen;
+        }
+        if(ShopOpen){
+            Shop.SetActive(true);
+            Looks = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        if(!ShopOpen){
+            Looks = true;
+            Shop.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
         //Placing Turret
-        if(Input.GetKeyDown(KeyCode.T)){
-            if(Money >= 100 && !isPlacingTurret){
-                isPlacingTurret = true;
-                TempTurret = Instantiate(Turret, transform.position, Quaternion.identity);
+        if(Physics.Raycast(MyCam.transform.position, MyCam.transform.forward, out RaycastHit SpawnerHit, RayLength) && IsPlacingItem){
+            TempItem.transform.position = SpawnerHit.point;
+            TempItem.transform.position = new Vector3(TempItem.transform.position.x, TempItem.transform.position.y + TempItemYOffset, TempItem.transform.position.z);
+            if(SpawnerHit.transform != null && Input.GetKeyDown(KeyCode.F)){
+                IsPlacingItem = false;
+                AddMoney(-TempItemCost);
+            }else if(Input.GetKeyDown(KeyCode.T)){
+                IsPlacingItem = false;
+                Destroy(TempItem);
             }
         }
-        if(Physics.Raycast(MyCam.transform.position, MyCam.transform.forward, out RaycastHit SpawnerHit, RayLength) && isPlacingTurret){
-            TempTurret.transform.position = SpawnerHit.point;
-            Vector3 newPosition = TempTurret.transform.position;
-            newPosition.y = SpawnerHit.point.y + 0.5f;
-            TempTurret.transform.position = newPosition;
-            if(SpawnerHit.transform != null && Input.GetKeyDown(KeyCode.F)){
-                isPlacingTurret = false;
-                AddMoney(-100);
-            }else if(Input.GetKeyDown(KeyCode.G)){
-                isPlacingTurret = false;
-                Destroy(TempTurret);
-            }
+    }
+    public void BuyItemsPlayer(GameObject Item, int Cost, float YSpawnOffset){
+        if(Money >= Cost){
+            IsPlacingItem = true;
+            TempItem = Item;
+            TempItemCost = Cost;
+            TempItemYOffset = YSpawnOffset;
+            TempItem = Instantiate(TempItem, transform.position, Quaternion.identity);
         }
     }
     //GamePlay

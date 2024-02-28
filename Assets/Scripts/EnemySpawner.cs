@@ -17,6 +17,7 @@ public class EnemySpawner : MonoBehaviour
     public float MinHealth = 50f;
     public float MaxDamage  = 10f;
     public float MinDamage = 5f;
+    public float SpawnTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,13 +34,14 @@ public class EnemySpawner : MonoBehaviour
         Vector3 SpawnPoint = new Vector3(transform.position.x + xOffset, transform.position.y, transform.position.z + zOffset);
         GameObject Enemy = Instantiate(EnemyPrefab, SpawnPoint, Quaternion.identity) as GameObject;
         Enemy.GetComponent<Enemy>().Initialize(Random.Range(MinScale, MaxScale), Random.Range(MinSpeed, MaxSpeed), Random.Range(MinDamage, MaxDamage), Random.Range(MinHealth, MaxHealth));
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(SpawnTime);
         MaxScale += 0.1f;
-        MinScale += 0.01f;
+        //MinScale += 0.01f;
         MaxSpeed += 0.5f;
-        MinSpeed += 0.01f;
+        //MinSpeed += 0.01f;
         MaxHealth += 1f;
-        MinHealth += 0.5f;
+        //MinHealth += 0.5f;
+        if(SpawnTime > 5)SpawnTime -= 0.1f; 
         StartCoroutine(SpawnEnemy());
     }
     void OnDrawGizmos(){
