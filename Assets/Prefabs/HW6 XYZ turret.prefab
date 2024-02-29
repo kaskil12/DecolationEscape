@@ -551,7 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackRange: 100
-  damage: 15
+  damage: 7
   AttackSpeed: 1
   AttackAble: 1
   ShootPoint: {fileID: 6474721027862404575}
