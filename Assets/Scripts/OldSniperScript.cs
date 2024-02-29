@@ -43,7 +43,7 @@ public class OldSniperScript : MonoBehaviour
     void Update()
     {
         PlayerMovement player = FindObjectOfType<PlayerMovement>();
-        if(!isEquipped && player.IsChangingWeapon == true)return;
+        if(!isEquipped || player.IsChangingWeapon == true)return;
         if(player.Aiming){
             if(Input.GetKeyDown(KeyCode.V)){
                 isAiming = !isAiming;
