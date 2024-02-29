@@ -42,8 +42,8 @@ public class OldSniperScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isEquipped)return;
         PlayerMovement player = FindObjectOfType<PlayerMovement>();
+        if(!isEquipped && player.IsChangingWeapon == true)return;
         if(player.Aiming){
             if(Input.GetKeyDown(KeyCode.V)){
                 isAiming = !isAiming;
@@ -87,6 +87,9 @@ public class OldSniperScript : MonoBehaviour
     public void Equip()
     {
         isEquipped = true;
+        isAiming = false;
+        isReloading = false;
+        isShooting = false;
         //.Log("Sniper Equipped");
     }
     public void Unequip()

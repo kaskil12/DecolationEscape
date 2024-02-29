@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
     public float InventoryLerpSpeedAiming;
     public float InventoryLerpSpeedNormal;
     public int CurrentObject;
+    public bool IsChangingWeapon = false;
 
     [Header("Interaction")]
     public float RayLength = 10;
@@ -251,6 +252,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     void ChangeCurrentObject(int NewCurrentObject){
+        if(Inventory[NewCurrentObject] == Inventory[CurrentObject])return;
         if(Inventory[NewCurrentObject] == null){
             Inventory[CurrentObject].SetActive(false);
             CurrentObject = NewCurrentObject;
@@ -260,6 +262,17 @@ public class PlayerMovement : MonoBehaviour
         Inventory[CurrentObject].transform.position = HandObject.transform.position;
         Inventory[CurrentObject].transform.rotation = HandObject.transform.rotation;
         Inventory[CurrentObject].SetActive(true);
+        StartCoroutine(ChangeItemDelay());
+        MonoBehaviour[] inventoryScripts = Inventory[CurrentObject].GetComponents<MonoBehaviour>();
+        foreach (var script in inventoryScripts)
+        {
+            MethodInfo equipMethod = script.GetType().GetMethod("Equip");
+            if (equipMethod != null)
+            {
+                equipMethod.Invoke(script, null);
+                break;
+            }
+        }
         foreach(GameObject obj in Inventory){
             if(obj != Inventory[CurrentObject] && obj != null){
                 obj.SetActive(false);
@@ -294,6 +307,7 @@ public class PlayerMovement : MonoBehaviour
                 Inventory[nextSlot].transform.rotation = HandObject.transform.rotation;
                 UpdateInventory();
                 if (Inventory[nextSlot] != null){
+                    StartCoroutine(ChangeItemDelay());
                     MonoBehaviour[] inventoryScripts = Inventory[nextSlot].GetComponents<MonoBehaviour>();
                     foreach (var script in inventoryScripts)
                     {
@@ -309,6 +323,12 @@ public class PlayerMovement : MonoBehaviour
             
             
         
+
+    }
+    IEnumerator ChangeItemDelay(){
+        IsChangingWeapon = true;
+        yield return new WaitForSeconds(1f);
+        IsChangingWeapon = false;
 
     }
     public void HandDrop(){

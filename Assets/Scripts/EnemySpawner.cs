@@ -41,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
         //MinSpeed += 0.01f;
         MaxHealth += 1f;
         //MinHealth += 0.5f;
-        if(SpawnTime > 5)SpawnTime -= 0.1f; 
+        if(SpawnTime > 5)SpawnTime -= 0.3f; 
         StartCoroutine(SpawnEnemy());
     }
     void OnDrawGizmos(){
