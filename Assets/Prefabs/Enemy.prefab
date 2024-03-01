@@ -375,7 +375,7 @@ Transform:
   m_GameObject: {fileID: 1478926282536556334}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1600,10 +1600,11 @@ MonoBehaviour:
   feet: {fileID: 1478926282536556334}
   agent: {fileID: 4940431194126556229}
   Target: {fileID: 0}
-  scale: 0
+  ScaleZombie: 0
   speeds: 0
   Damage: 0
   Health: 0
+  StartHealth: 100
   animator: {fileID: 0}
   Initialized: 0
 --- !u!195 &4940431194126556229

@@ -550,8 +550,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894798cc0d485844aad971f9a2399b00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackRange: 100
-  damage: 7
+  AttackRange: 70
+  damage: 15
   AttackSpeed: 1
   AttackAble: 1
   ShootPoint: {fileID: 6474721027862404575}

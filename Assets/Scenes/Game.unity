@@ -159,6 +159,7 @@ RectTransform:
   - {fileID: 2019030777}
   - {fileID: 1779111114}
   - {fileID: 192661201}
+  - {fileID: 1084111682}
   m_Father: {fileID: 1545057825}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -301,7 +302,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -330,7 +331,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -55.257935, w: -73.819214}
+  m_margin: {x: 0, y: 18.316345, z: -55.257935, w: -52.310974}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -360,7 +361,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1114.6, y: 272.7}
+  m_AnchoredPosition: {x: 769.6, y: 272.7}
   m_SizeDelta: {x: 957.9, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &192661200
@@ -456,7 +457,6 @@ GameObject:
   - component: {fileID: 205165755}
   - component: {fileID: 205165754}
   - component: {fileID: 205165753}
-  - component: {fileID: 205165752}
   m_Layer: 5
   m_Name: BarrierBuyButton
   m_TagString: Untagged
@@ -484,26 +484,6 @@ RectTransform:
   m_AnchoredPosition: {x: 14.4, y: 167.8}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &205165752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 205165750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff2da11321444d59aa73429c14007612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjectToBuy: {fileID: 4046509321548194490, guid: 71443cc0c3c9ddd4fb5334d6c3514ff2, type: 3}
-  Price: 10
-  SpawnOffst: 0.5
-  rotation: {x: -90, y: 0, z: -90}
-  ItemName: Barrier
-  PriceText: {fileID: 157262132}
-  IsItemPlaced: 1
-  IsPriceChanged: 1
 --- !u!114 &205165753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,7 +528,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 205165752}
+      - m_Target: {fileID: 1082467193}
         m_TargetAssemblyTypeName: BuyItemScript, Assembly-CSharp
         m_MethodName: BuyItem
         m_Mode: 1
@@ -1273,7 +1253,6 @@ GameObject:
   - component: {fileID: 390190686}
   - component: {fileID: 390190685}
   - component: {fileID: 390190684}
-  - component: {fileID: 390190683}
   m_Layer: 5
   m_Name: SecretWeaponButton
   m_TagString: Untagged
@@ -1301,26 +1280,6 @@ RectTransform:
   m_AnchoredPosition: {x: 14.4, y: -196.9}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &390190683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 390190681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff2da11321444d59aa73429c14007612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjectToBuy: {fileID: 1078938522194421164, guid: 006a788f37b4670028e1f1ace22417f1, type: 3}
-  Price: 100000
-  SpawnOffst: 0
-  rotation: {x: 0, y: 0, z: 0}
-  ItemName: Secret Weapon
-  PriceText: {fileID: 1544177483}
-  IsItemPlaced: 1
-  IsPriceChanged: 1
 --- !u!114 &390190684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1365,7 +1324,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 390190683}
+      - m_Target: {fileID: 1296389753}
         m_TargetAssemblyTypeName: BuyItemScript, Assembly-CSharp
         m_MethodName: BuyItem
         m_Mode: 1
@@ -1870,7 +1829,6 @@ GameObject:
   - component: {fileID: 651377679}
   - component: {fileID: 651377678}
   - component: {fileID: 651377677}
-  - component: {fileID: 651377680}
   m_Layer: 5
   m_Name: TurretBuyButton
   m_TagString: Untagged
@@ -1942,7 +1900,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 651377680}
+      - m_Target: {fileID: 1200312788}
         m_TargetAssemblyTypeName: BuyItemScript, Assembly-CSharp
         m_MethodName: BuyItem
         m_Mode: 1
@@ -1992,26 +1950,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651377675}
   m_CullTransparentMesh: 1
---- !u!114 &651377680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 651377675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff2da11321444d59aa73429c14007612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjectToBuy: {fileID: 2722973325247447414, guid: 2eb7c53f61e5de64d9327bd27ceee334, type: 3}
-  Price: 100
-  SpawnOffst: 0.5
-  rotation: {x: 0, y: 0, z: 0}
-  ItemName: Turret
-  PriceText: {fileID: 1128964558}
-  IsItemPlaced: 1
-  IsPriceChanged: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,6 +2286,100 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+--- !u!1 &1082467191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1082467192}
+  - component: {fileID: 1082467193}
+  m_Layer: 5
+  m_Name: BarrierScript
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1082467192
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082467191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1084111682}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1082467193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082467191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2da11321444d59aa73429c14007612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectToBuy: {fileID: 4046509321548194490, guid: 71443cc0c3c9ddd4fb5334d6c3514ff2, type: 3}
+  Price: 10
+  SpawnOffst: 0.5
+  rotation: {x: -90, y: 0, z: -90}
+  ItemName: Barrier
+  PriceText: {fileID: 157262132}
+  IsItemPlaced: 1
+  IsPriceChanged: 1
+--- !u!1 &1084111681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1084111682}
+  m_Layer: 5
+  m_Name: CanvasScripts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1084111682
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084111681}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1296389752}
+  - {fileID: 1200312787}
+  - {fileID: 1082467192}
+  m_Father: {fileID: 63064465}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1098052880
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,7 +2579,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1114.6, y: 417.19998}
+  m_AnchoredPosition: {x: 770.99, y: 417.19998}
   m_SizeDelta: {x: 957.9, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1128964558
@@ -2604,7 +2636,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2633,7 +2665,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -55.257935, w: -73.819214}
+  m_margin: {x: 0, y: 0, z: -55.257935, w: -53.75232}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2775,6 +2807,62 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1200312786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1200312787}
+  - component: {fileID: 1200312788}
+  m_Layer: 5
+  m_Name: TurretBuyScript
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1200312787
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200312786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1084111682}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1200312788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200312786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2da11321444d59aa73429c14007612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectToBuy: {fileID: 2722973325247447414, guid: 2eb7c53f61e5de64d9327bd27ceee334, type: 3}
+  Price: 100
+  SpawnOffst: 0.5
+  rotation: {x: 0, y: 0, z: 0}
+  ItemName: Turret
+  PriceText: {fileID: 1128964558}
+  IsItemPlaced: 1
+  IsPriceChanged: 1
 --- !u!1 &1210764892
 GameObject:
   m_ObjectHideFlags: 0
@@ -2962,6 +3050,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Effectors: []
+--- !u!1 &1296389751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1296389752}
+  - component: {fileID: 1296389753}
+  m_Layer: 5
+  m_Name: SecretWeaponScript
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1296389752
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296389751}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1084111682}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1296389753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296389751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2da11321444d59aa73429c14007612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectToBuy: {fileID: 1078938522194421164, guid: 006a788f37b4670028e1f1ace22417f1, type: 3}
+  Price: 100000
+  SpawnOffst: 0
+  rotation: {x: 0, y: 0, z: 0}
+  ItemName: Secret Weapon
+  PriceText: {fileID: 1544177483}
+  IsItemPlaced: 1
+  IsPriceChanged: 1
 --- !u!1 &1300035112
 GameObject:
   m_ObjectHideFlags: 0
@@ -3444,7 +3588,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -3473,7 +3617,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -55.257935, w: -73.819214}
+  m_margin: {x: 0, y: 0, z: -55.257935, w: -55.060394}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3503,7 +3647,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1114.6, y: -85.6}
+  m_AnchoredPosition: {x: 780, y: -85.6}
   m_SizeDelta: {x: 957.9, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1545057822
@@ -3598,6 +3742,7 @@ MonoBehaviour:
   InventoryLerpSpeedAiming: 200
   InventoryLerpSpeedNormal: 40
   CurrentObject: 0
+  IsChangingWeapon: 0
   RayLength: 10
   MoneyText: {fileID: 1098052882}
   InteractionText: {fileID: 216030633}

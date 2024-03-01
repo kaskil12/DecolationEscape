@@ -19,6 +19,8 @@ public class Base : MonoBehaviour
     public void TakeDamageBase(float damage){
         Health -= damage;
         if(Health <= 0){
+            PlayerMovement player = GameObject.Find("PlayerFolder").GetComponent<PlayerMovement>();
+            player.TakeDamage(100);
             Destroy(gameObject);
         }
     }

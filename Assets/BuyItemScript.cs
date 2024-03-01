@@ -30,6 +30,7 @@ public class BuyItemScript : MonoBehaviour
         }
         if(!IsPriceChanged){
             Price *= 2;
+            PriceText.text = ItemName + ": " +Price.ToString();
             IsPriceChanged = true;
         }
     }
