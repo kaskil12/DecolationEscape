@@ -219,6 +219,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void BuyItemsPlayer(GameObject Item, int Cost, float YSpawnOffset, Vector3 Rotation){
         if(Money >= Cost){
+            ShopOpen = false;
             IsPlacingItem = true;
             TempItem = Item;
             TempItemCost = Cost;
